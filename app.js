@@ -63,7 +63,7 @@ function renderPreview() {
 function updateProvider() {
   const isGemini = $("provider").value === "gemini";
   $("keyLabel").textContent = isGemini ? "Gemini API key" : "OpenAI API key";
-  $("model").value = isGemini ? "gemini-2.5-flash" : "gpt-4.1-mini";
+$("model").value = isGemini ? "gemini-3.8-flash" : "gpt-4.1-mini";
   $("modelHint").textContent = isGemini ? "Default Gemini model · change if needed" : "Default OpenAI model · change if needed";
   $("apiKey").placeholder = isGemini ? "Paste your Gemini API key" : "Paste your OpenAI API key";
 }
