@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Translate SRT subtitles into natural Malabar Malayalam with AI. Preserve subtitle numbering and timestamps.">
+  <title>Faz SRT Translator — Natural Malabar Malayalam</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Faz SRT Translator home">
+      <span class="brand-mark">F</span>
+      <span>FAZ <b>SRT</b><small>TRANSLATOR</small></span>
+    </a>
+    <span class="top-pill"><i></i> Natural Malayalam AI</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">ENGLISH → MALABAR MALAYALAM</div>
+      <h1>Subtitles that sound<br><span>like real people.</span></h1>
+      <p>Translate English subtitles into natural, conversational Kerala Malayalam — not stiff, word-for-word textbook language.</p>
+      <div class="hero-tags"><span>മലബാർ ശൈലി</span><span>Natural dialogue</span><span>Timestamp-safe SRT</span></div>
+    </section>
+
+    <section class="workspace card">
+      <div class="section-heading">
+        <div><span class="step">01</span><h2>Choose your subtitle file</h2></div>
+        <span class="format-badge">.SRT</span>
+      </div>
+      <label class="dropzone" id="dropzone" for="srtFile">
+        <input id="srtFile" type="file" accept=".srt,application/x-subrip,text/plain">
+        <span class="upload-icon">↑</span>
+        <strong id="fileTitle">Drop your SRT file here</strong>
+        <span id="fileSub">or tap to browse · UTF-8 recommended</span>
+      </label>
+      <div class="file-meta" id="fileMeta" hidden></div>
+
+      <div class="section-heading section-gap">
+        <div><span class="step">02</span><h2>Translation settings</h2></div>
+      </div>
+      <div class="form-grid">
+        <label class="field">
+          <span>AI provider</span>
+          <select id="provider">
+            <option value="gemini">Google Gemini</option>
+            <option value="openai">OpenAI / ChatGPT</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Model</span>
+          <input id="model" value="gemini-2.5-flash" autocomplete="off" spellcheck="false">
+          <small id="modelHint">Default Gemini model · change if needed</small>
+        </label>
+        <label class="field full">
+          <span id="keyLabel">Gemini API key</span>
+          <div class="key-wrap">
+            <input id="apiKey" type="password" placeholder="Paste your API key" autocomplete="off" spellcheck="false">
+            <button type="button" class="reveal" id="toggleKey">Show</button>
+          </div>
+          <small>Your key is used only for this request and is not saved by this website.</small>
+        </label>
+        <label class="field">
+          <span>Malayalam style</span>
+          <select id="dialect">
+            <option value="malabar" selected>Malabar / Kozhikode</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Dialogue tone</span>
+          <select id="tone">
+            <option value="natural" selected>Natural conversation</option>
+            <option value="cinematic">Cinematic dialogue</option>
+            <option value="clean">Clean, light slang</option>
+            <option value="rough">Rough / strong slang (where suitable)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="notice">
+        <span>✦</span>
+        <p><b>Translation approach:</b> Keep the meaning, emotion, character voice and context. Use natural Malabar Malayalam where it fits. Avoid forced slang and overly formal, literal translations.</p>
+      </div>
+
+      <button id="translateBtn" class="primary-btn" disabled>
+        <span>Translate to Malayalam</span><span>→</span>
+      </button>
+      <div class="progress-area" id="progressArea" hidden>
+        <div class="progress-label"><span id="progressText">Preparing…</span><b id="progressPct">0%</b></div>
+        <div class="progress-track"><div id="progressBar"></div></div>
+      </div>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="result card" id="result" hidden>
+      <div class="result-head">
+        <div><span class="step">03</span><h2>Translation preview</h2><p id="resultInfo">Your Malayalam SRT is ready.</p></div>
+        <button id="downloadBtn" class="download-btn">↓ Download SRT</button>
+      </div>
+      <div class="preview" id="preview"></div>
+    </section>
+
+    <section class="privacy-note">
+      <b>Privacy & API costs</b>
+      <p>Your API key is not written to local storage or a database. It is sent over HTTPS to this site's temporary processing endpoint and forwarded to your chosen AI provider. AI provider usage charges and limits may apply. Avoid using keys on shared devices.</p>
+    </section>
+  </main>
+  <footer>FAZ SRT TRANSLATOR <span>·</span> Built for natural Malayalam dialogue</footer>
+  <script src="/app.js"></script>
+</body>
+</html>
