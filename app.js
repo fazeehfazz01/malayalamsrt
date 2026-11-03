@@ -62,10 +62,24 @@ function renderPreview() {
 
 function updateProvider() {
   const isGemini = $("provider").value === "gemini";
+  const modelSelect = $("model");
+
   $("keyLabel").textContent = isGemini ? "Gemini API key" : "OpenAI API key";
-$("model").value = isGemini ? "gemini-3.8-flash" : "gpt-4.1-mini";
-  $("modelHint").textContent = isGemini ? "Default Gemini model · change if needed" : "Default OpenAI model · change if needed";
-  $("apiKey").placeholder = isGemini ? "Paste your Gemini API key" : "Paste your OpenAI API key";
+
+  modelSelect.querySelectorAll("optgroup").forEach(group => {
+    const isGeminiGroup = group.label === "Google Gemini";
+    group.hidden = isGemini ? !isGeminiGroup : isGeminiGroup;
+  });
+
+  modelSelect.value = isGemini ? "gemini-3.8-flash" : "gpt-6.1-sol";
+
+  $("modelHint").textContent = isGemini
+    ? "Choose a Gemini model"
+    : "Choose an OpenAI model";
+
+  $("apiKey").placeholder = isGemini
+    ? "Paste your Gemini API key"
+    : "Paste your OpenAI API key";
 }
 
 $("provider").addEventListener("change", updateProvider);
