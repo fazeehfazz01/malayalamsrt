@@ -50,10 +50,21 @@
           </select>
         </label>
         <label class="field">
-          <span>Model</span>
-          <input id="model" value="gemini-3.8-flash" autocomplete="off" spellcheck="false">
-          <small id="modelHint">Default Gemini model · change if needed</small>
-        </label>
+  <span>Model Quality</span>
+  <select id="model">
+    <optgroup label="Google Gemini">
+      <option value="gemini-3.5-flash-lite">Basic - Gemini 3.5 Flash-Lite</option>
+      <option value="gemini-3.8-flash" selected>Standard - Gemini 3.8 Flash</option>
+      <option value="gemini-3.1-pro-preview">Pro - Gemini 3.1 Pro</option>
+    </optgroup>
+    <optgroup label="OpenAI">
+      <option value="gpt-6-luna">Basic - GPT-6 Luna</option>
+      <option value="gpt-6.1-sol">Standard - GPT-6.1 Sol</option>
+      <option value="gpt-6-astra">Pro - GPT-6 Astra</option>
+    </optgroup>
+  </select>
+  <small id="modelHint">Choose your preferred AI model quality.</small>
+</label>
         <label class="field full">
           <span id="keyLabel">Gemini API key</span>
           <div class="key-wrap">
