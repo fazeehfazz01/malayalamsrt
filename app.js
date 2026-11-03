@@ -83,6 +83,7 @@ function updateProvider() {
 }
 
 $("provider").addEventListener("change", updateProvider);
+updateProvider();
 $("toggleKey").addEventListener("click", () => {
   const input = $("apiKey");
   input.type = input.type === "password" ? "text" : "password";
