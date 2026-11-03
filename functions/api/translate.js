@@ -40,6 +40,7 @@ async function callGemini(apiKey, model, prompt) {
       systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
       contents: [{ role: "user", parts: [{ text: prompt }] }],
       generationConfig: { responseMimeType: "application/json" }
+    })
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(data.error?.message || `Gemini API error (${response.status}).`);
