@@ -50,23 +50,36 @@ async function callGemini(apiKey, model, prompt) {
 }
 
 async function callOpenAI(apiKey, model, prompt) {
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+  const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
     body: JSON.stringify({
       model,
-      temperature: 0.35,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: prompt }
-      ]
+      instructions: SYSTEM_PROMPT,
+      input: prompt,
+      text: {
+        format: { type: "json_object" }
+      }
     })
   });
+
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error?.message || `OpenAI API error (${response.status}).`);
-  const text = data.choices?.[0]?.message?.content;
+
+  if (!response.ok) {
+    throw new Error(data.error?.message || `OpenAI API error (${response.status}).`);
+  }
+
+  const text = data.output
+    ?.flatMap(item => item.content || [])
+    .filter(part => part.type === "output_text")
+    .map(part => part.text)
+    .join("");
+
   if (!text) throw new Error("OpenAI returned an empty response.");
+
   return text;
 }
 
